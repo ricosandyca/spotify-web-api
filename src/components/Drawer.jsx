@@ -12,7 +12,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Profile from './Profile'
 import Playlist from './Playlist'
 
-const drawerWidth = 275
+const drawerWidth = 300
 
 const useStyles = makeStyles((theme) => ({
   root: {
