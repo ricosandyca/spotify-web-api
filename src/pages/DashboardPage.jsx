@@ -6,13 +6,15 @@ import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { userData } from '../store/user'
+import PlaylistCards from '../components/PlaylistCards'
 import defaultAvatar from '../assets/img/default-avatar.jpg'
 
 const useStyles = makeStyles(theme => ({
   paper: {
     background: theme.palette.background.default,
     padding: theme.spacing(2),
-    borderRadius: theme.spacing(1)
+    borderRadius: theme.spacing(1),
+    marginBottom: theme.spacing(2)
   },
   avatar: {
     width: theme.spacing(11),
@@ -44,6 +46,7 @@ export default function DashboardPage() {
           </Box>
         </Box>
       </Paper>
+      <PlaylistCards />
     </div>
   )
 }
