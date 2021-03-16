@@ -9,6 +9,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import CustomButton from './CustomButton'
 import { userData } from '../store/user'
 import { deleteSpotifyAuthToken } from '../services/auth'
+import defaultAvatar from '../assets/img/default-avatar.jpg'
 
 const useStyles = makeStyles(theme => ({
   profile: {
@@ -45,7 +46,7 @@ export default function Profile() {
 
   return (
     <div className={classes.profile}>
-      {user.images[0]?.url && <Avatar src={user.images[0].url} className={classes.avatar} />}
+      <Avatar src={user.images[0]?.url || defaultAvatar} className={classes.avatar} />
       <Box className={classes.accountInfo}>
         <Typography variant='body2'><b>{user.display_name}</b></Typography>
         <Typography variant='caption'>{user.email}</Typography>

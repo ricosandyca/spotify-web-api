@@ -8,7 +8,7 @@ export const playlistState = selector({
   get: async () => {
     try {
       const userAuth = getSpotifyAuthToken()
-      const res = await fetch(appConfig.spotifyAPIURL + '/me/playlists', {
+      const res = await fetch(appConfig.spotifyAPIURL + '/me/playlists?limit=50', {
         method: 'GET',
         headers: {
           Authorization: `${userAuth.token_type} ${userAuth.access_token}`

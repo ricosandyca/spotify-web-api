@@ -24,7 +24,7 @@ export default function Playlist() {
   return (
     <List subheader={
       <ListSubheader className={classes.subheader}>
-        Playlists
+        My Playlists
       </ListSubheader>
     }>
       {playlists.map(({ id, ...playlist }) => (
