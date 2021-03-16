@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 const CustomButton = withStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     borderRadius: theme.spacing(.75),
     border: `1px solid ${theme.palette.primary.main}`,
     textTransform: 'none',
