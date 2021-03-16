@@ -21,7 +21,7 @@ export default function PlaylistCards() {
     <Grid container spacing={4}>
       {playlists.map(({ id, ...playlist }) => (
         <Grid key={id} item xs={3}>
-          <img src={playlist.images[0]?.url ||defaultPlaylistImage } className={classes.image} />
+          <img src={playlist.images[0]?.url ||defaultPlaylistImage } className={classes.image} alt={playlist.name} />
         </Grid>
       ))}
     </Grid>

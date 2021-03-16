@@ -4,7 +4,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import Typography from '@material-ui/core/Typography'
-import ButtonBase from '@material-ui/core/ButtonBase'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import CustomButton from './CustomButton'
