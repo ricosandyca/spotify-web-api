@@ -4,6 +4,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import Typography from '@material-ui/core/Typography'
+import ButtonBase from '@material-ui/core/ButtonBase'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import CustomButton from './CustomButton'
@@ -46,10 +47,18 @@ export default function Profile() {
 
   return (
     <div className={classes.profile}>
-      <Avatar src={user.images[0]?.url || defaultAvatar} className={classes.avatar} />
-      <Box className={classes.accountInfo}>
-        <Typography variant='body2'><b>{user.display_name}</b></Typography>
-        <Typography variant='caption'>{user.email}</Typography>
+      <Box
+        onClick={() => history.push('/dashboard')}
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        style={{ cursor: 'pointer' }}
+      >
+        <Avatar src={user.images[0]?.url || defaultAvatar} className={classes.avatar} />
+        <Box className={classes.accountInfo}>
+          <Typography variant='body2'><b>{user.display_name}</b></Typography>
+          <Typography variant='caption'>{user.email}</Typography>
+        </Box>
       </Box>
       <CustomButton
         size='small'
