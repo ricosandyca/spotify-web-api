@@ -1,5 +1,3 @@
-export default function App() {
-  return (
-    <div>Hello World</div>
-  )
-}
+import IndexRoutes from './routes/IndexRoutes'
+
+export default IndexRoutes
