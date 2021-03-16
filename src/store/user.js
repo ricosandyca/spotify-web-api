@@ -1,6 +1,22 @@
-import { atom } from 'recoil'
+import { selector } from 'recoil'
 
-export const userData = atom({
+import appConfig from '../config/app'
+import { getSpotifyAuthToken } from '../services/auth'
+
+export const userData = selector({
   key: 'userData',
-  default: undefined
+  get: async () => {
+    try {
+      const userAuth = getSpotifyAuthToken()
+      const res = await fetch(appConfig.spotifyAPIURL + '/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `${userAuth.token_type} ${userAuth.access_token}`
+        }
+      })
+      return await res.json()
+    } catch {
+      return undefined
+    }
+  }
 })

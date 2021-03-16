@@ -1,3 +1,5 @@
+import { useRecoilValue } from 'recoil'
+import { useHistory } from 'react-router'
 import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
@@ -5,6 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import CustomButton from './CustomButton'
+import { userData } from '../store/user'
+import { deleteSpotifyAuthToken } from '../services/auth'
 
 const useStyles = makeStyles(theme => ({
   profile: {
@@ -31,18 +35,26 @@ const useStyles = makeStyles(theme => ({
 
 export default function Profile() {
   const classes = useStyles()
+  const history = useHistory()
+  const user = useRecoilValue(userData)
+
+  const logout = () => {
+    deleteSpotifyAuthToken()
+    history.push('/auth')
+  }
 
   return (
     <div className={classes.profile}>
-      <Avatar src='https://material-ui.com/static/images/avatar/3.jpg' className={classes.avatar} />
+      {user.images[0]?.url && <Avatar src={user.images[0].url} className={classes.avatar} />}
       <Box className={classes.accountInfo}>
-        <Typography variant='body2'><b>Rico Sandyca</b></Typography>
-        <Typography variant='caption'>ricosandyca.if@gmail.com</Typography>
+        <Typography variant='body2'><b>{user.display_name}</b></Typography>
+        <Typography variant='caption'>{user.email}</Typography>
       </Box>
       <CustomButton
         size='small'
         className={classes.button}
         startIcon={<LogoutIcon />}
+        onClick={logout}
       >
         LOGOUT
       </CustomButton>
