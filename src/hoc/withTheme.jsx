@@ -1,12 +1,12 @@
 import theme from '../config/theme'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import { ThemeProvider } from '@material-ui/core/styles'
 
 export default function withTheme(Content) {
   return function() {
     return (
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Content />
-      </MuiThemeProvider>
+      </ThemeProvider>
     )
   }
 }
