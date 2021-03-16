@@ -1,3 +1,4 @@
 import IndexRoutes from './routes/IndexRoutes'
+import withTheme from './hoc/withTheme'
 
-export default IndexRoutes
+export default withTheme(IndexRoutes)
