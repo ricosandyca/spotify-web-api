@@ -5,6 +5,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import { withAuthorizedUser, withUnauthorizedUser } from '../hoc/withAuthorization'
 import NotFoundPage from '../pages/NotFoundPage'
 import AuthPage from '../pages/AuthPage'
 import SpotifyAuthCallbackPage from '../pages/SpotifyAuthCallbackPage'
@@ -18,17 +19,17 @@ const routes = [
   },
   {
     path: '/auth',
-    component: AuthPage,
+    component: withUnauthorizedUser(AuthPage),
     exact: true
   },
   {
     path: '/spotify-auth',
-    component: SpotifyAuthCallbackPage,
+    component: withUnauthorizedUser(SpotifyAuthCallbackPage),
     exact: true
   },
   {
     path: '/dashboard',
-    component: DashboardRoutes
+    component: withAuthorizedUser(DashboardRoutes)
   },
   {
     component: NotFoundPage
