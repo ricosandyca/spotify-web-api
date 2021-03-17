@@ -16,7 +16,7 @@ export const userData = selector({
       })
       return await res.json()
     } catch {
-      return undefined
+      return {}
     }
   }
 })

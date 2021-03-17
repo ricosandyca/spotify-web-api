@@ -16,7 +16,9 @@ export const playlistState = selector({
       })
       return await res.json()
     } catch {
-      return []
+      return {
+        items: []
+      }
     }
   }
 })
