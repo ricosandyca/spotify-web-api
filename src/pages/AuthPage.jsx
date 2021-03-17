@@ -1,4 +1,4 @@
-import { SpotifyAuth } from 'react-spotify-auth'
+import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
@@ -61,6 +61,7 @@ export default function AuthPage() {
       <SpotifyAuth
         clientID={appConfig.spotifyClientId}
         redirectUri={`${appConfig.appURL}/spotify-auth`}
+        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail, Scopes.playlistModifyPrivate, Scopes.playlistModifyPublic]}
         showDialog={true}
         noCookie={false}
         btnClassName={classes.spotifyButton}

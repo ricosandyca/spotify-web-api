@@ -14,6 +14,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { userData } from '../store/user'
+import { useDeleteItemFromPlaylist } from '../hooks/usePlaylist'
 import defaultPlaylistImage from '../assets/img/default-playlist-image.jpg'
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +27,17 @@ export default function SongList({ playlist }) {
   const { tracks: { items: tracks } } = playlist
   const classes = useStyles()
   const user = useRecoilValue(userData)
+  const { deleteItem } = useDeleteItemFromPlaylist()
+
   const isOwner = playlist.owner.id === user.id
+
+  const deleteTrack = (trackId) => {
+    deleteItem(playlist.id, trackId, success => {
+      if (success) {
+        window.location.reload()
+      }
+    })
+  }
 
   return (
     <List subheader={
@@ -57,7 +68,7 @@ export default function SongList({ playlist }) {
             />
             {isOwner && (
               <ListItemSecondaryAction>
-                <IconButton edge='end'>
+                <IconButton edge='end' onClick={() => deleteTrack(track.track.id)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
