@@ -53,7 +53,7 @@ export default function Profile() {
         alignItems='center'
         style={{ cursor: 'pointer' }}
       >
-        <Avatar src={user.images[0]?.url || defaultAvatar} className={classes.avatar} />
+        <Avatar src={(user.images || [])[0]?.url || defaultAvatar} className={classes.avatar} />
         <Box className={classes.accountInfo}>
           <Typography variant='body2'><b>{user.display_name}</b></Typography>
           <Typography variant='caption'>{user.email}</Typography>

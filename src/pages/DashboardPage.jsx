@@ -35,7 +35,7 @@ export default function DashboardPage() {
     <div>
       <Paper variant='outlined' className={classes.paper}>
         <Box display='flex' flexDirection='row'>
-          <Avatar src={user.images[0]?.url || defaultAvatar} className={classes.avatar} />
+          <Avatar src={(user.images || [])[0]?.url || defaultAvatar} className={classes.avatar} />
           <Box display='flex' flexDirection='column' justifyContent='center'>
             <Typography variant='h6'>{user.display_name}</Typography>
             <Typography variant='body2'>{user.email}</Typography>

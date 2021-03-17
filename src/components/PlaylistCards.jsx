@@ -44,9 +44,10 @@ export default function PlaylistCards() {
             onClick={() => history.push(`/dashboard/playlist/${id}`)}
           >
             <img
-              src={playlist.images[0]?.url || defaultPlaylistImage}
+              src={(playlist.images || [])[0]?.url || defaultPlaylistImage}
               className={classes.image}
-              alt={playlist.name} />
+              alt={playlist.name}
+            />
             <Box className={classes.content}>
               <Typography variant='body1'>
                 <TruncatedText maxLine={1}>{playlist.name}</TruncatedText>

@@ -30,7 +30,7 @@ export default function Playlist() {
       {playlists.map(({ id, ...playlist }) => (
         <ListItem key={id} button component={Link} to={`/dashboard/playlist/${id}`}>
           <ListItemIcon>
-            {playlist.images[0]?.url ? (
+            {(playlist.images || [])[0]?.url ? (
               <Avatar src={playlist.images[0].url} />
             ) : (
               <PlaylistPlayIcon />
