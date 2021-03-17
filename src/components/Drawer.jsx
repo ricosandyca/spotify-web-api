@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+  toolbar: {
+    [theme.breakpoints.down('xs')]: theme.mixins.toolbar
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
