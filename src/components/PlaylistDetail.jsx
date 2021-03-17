@@ -1,3 +1,4 @@
+import { useRecoilValue } from 'recoil'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
@@ -5,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import defaultPlaylistImage from '../assets/img/default-playlist-image.jpg'
+import { userData } from '../store/user'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -22,11 +24,16 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2),
       paddingBottom: theme.spacing(.75)
     }
+  },
+  owner: {
+    color: theme.palette.secondary.main
   }
 }))
 
 export default function PlaylistDetail({ playlist }) {
   const classes = useStyles()
+  const user = useRecoilValue(userData)
+  const isOwner = playlist.owner.id === user.id
 
   return (
     <Paper variant='outlined' className={classes.paper}>
@@ -39,10 +46,15 @@ export default function PlaylistDetail({ playlist }) {
           />
         </Grid>
         <Grid item className={classes.gridContent}>
-          <Box>
+          <Box display='flex' flexDirection='column'>
             <Typography variant='h4'><b>{playlist.name}</b></Typography>
             <Typography variant='caption'>
               • {playlist.tracks.total} tracks
+            </Typography>
+            <Typography variant='caption'>
+              • Owner: <span className={isOwner && classes.owner}>
+                {isOwner ? 'You' : playlist.owner.display_name}
+              </span>
             </Typography>
           </Box>
         </Grid>

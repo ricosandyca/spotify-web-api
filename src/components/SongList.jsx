@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { useRecoilValue } from 'recoil'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider'
@@ -12,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+import { userData } from '../store/user'
 import defaultPlaylistImage from '../assets/img/default-playlist-image.jpg'
 
 const useStyles = makeStyles(theme => ({
@@ -20,8 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function SongList({ tracks }) {
+export default function SongList({ playlist }) {
+  const { tracks: { items: tracks } } = playlist
   const classes = useStyles()
+  const user = useRecoilValue(userData)
+  const isOwner = playlist.owner.id === user.id
 
   return (
     <List subheader={
@@ -50,11 +55,13 @@ export default function SongList({ tracks }) {
                 </>
               }
             />
-            <ListItemSecondaryAction>
-              <IconButton edge='end'>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {isOwner && (
+              <ListItemSecondaryAction>
+                <IconButton edge='end'>
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            )}
           </ListItem>
           <Divider variant='inset' component='li' />
         </Fragment>

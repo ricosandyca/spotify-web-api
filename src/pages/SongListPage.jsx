@@ -9,12 +9,12 @@ import { playlistDetail } from '../store/playlist'
 export default function SongListPage() {
   const params = useParams()
   const playlistId = params.playlistId
-  const { tracks, ...playlist } = useRecoilValue(playlistDetail(playlistId))
+  const playlist = useRecoilValue(playlistDetail(playlistId))
 
   return (
     <Box>
-      <PlaylistDetail playlist={{ ...playlist, tracks }} />
-      <SongList tracks={tracks.items} />
+      <PlaylistDetail playlist={playlist} />
+      <SongList playlist={playlist} />
     </Box>
   )
 }
