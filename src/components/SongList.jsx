@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -14,7 +14,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { userData } from '../store/user'
-import { useDeleteItemFromPlaylist } from '../hooks/usePlaylist'
+import DeleteTrackDialog from './DeleteTrackDialog'
 import defaultPlaylistImage from '../assets/img/default-playlist-image.jpg'
 
 const useStyles = makeStyles(theme => ({
@@ -27,16 +27,16 @@ export default function SongList({ playlist }) {
   const { tracks: { items: tracks } } = playlist
   const classes = useStyles()
   const user = useRecoilValue(userData)
-  const { deleteItem } = useDeleteItemFromPlaylist()
+  const [deleteDialog, setDeleteDialog] = useState({ isOpen: false })
 
   const isOwner = playlist.owner.id === user.id
 
-  const deleteTrack = (trackId) => {
-    deleteItem(playlist.id, trackId, success => {
-      if (success) {
-        window.location.reload()
-      }
-    })
+  const openDeleteDialog = (trackId) => {
+    setDeleteDialog(curr => ({ ...curr, isOpen: true, trackId }))
+  }
+
+  const closeDeleteDialog = () => {
+    setDeleteDialog(curr => ({ ...curr, isOpen: false }))
   }
 
   return (
@@ -68,7 +68,7 @@ export default function SongList({ playlist }) {
             />
             {isOwner && (
               <ListItemSecondaryAction>
-                <IconButton edge='end' onClick={() => deleteTrack(track.track.id)}>
+                <IconButton edge='end' onClick={() => openDeleteDialog(track.track.id)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -77,6 +77,12 @@ export default function SongList({ playlist }) {
           <Divider variant='inset' component='li' />
         </Fragment>
       ))}
+      <DeleteTrackDialog
+        playlistId={playlist.id}
+        trackId={deleteDialog.trackId}
+        isOpen={deleteDialog.isOpen}
+        closeDialog={closeDeleteDialog}
+      />
     </List>
   )
 }
