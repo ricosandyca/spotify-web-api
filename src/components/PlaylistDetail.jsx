@@ -15,7 +15,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   },
   image: {
-    width: '100%'
+    width: '100%',
+    aspectRatio: '1/1',
+    objectFit: 'cover'
   },
   gridContent: {
     marginTop: theme.spacing(1),
