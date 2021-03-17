@@ -13,7 +13,7 @@ export default function SongListPage() {
 
   return (
     <Box>
-      <PlaylistDetail playlist={playlist} />
+      <PlaylistDetail playlist={{ ...playlist, tracks }} />
       <SongList tracks={tracks.items} />
     </Box>
   )
